@@ -15,6 +15,15 @@ get_ipython().system(f"git clone -b icta {CLONE_URL}")
 %cd /kaggle/working/BrainTumour_Seg
 get_ipython().system(f"python utils/setup.py <wandb key>")
 get_ipython().system(f"python preprocess_data.py") ##For iseg dataset
+
+# Chuyển đến thư mục làm việc
+get_ipython().system("cd /kaggle/working/")
+USER = "RC-Sho0"
+REPO_NAME = "3D-DynUnet"
+CLONE_URL = f"https://github.com/{USER}/{REPO_NAME}.git"
+get_ipython().system(f"git clone -b icta {CLONE_URL}")
+get_ipython().system("cd /kaggle/working/BrainTumour_Seg")
+
 ```
 
 3. Adjust parameters in file config.json
