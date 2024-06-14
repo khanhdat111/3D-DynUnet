@@ -1,0 +1,6 @@
+SimpleITK
+pytorch_lightning
+monai
+wandb
+torch-summary
+einops
