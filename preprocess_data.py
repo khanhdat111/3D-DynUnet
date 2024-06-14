@@ -17,7 +17,7 @@ niipath = "/kaggle/working/imagesTr"
 labelpath = "/kaggle/working/labelsTr"
 val_niipath = "/kaggle/working/imagesTs"
 
-process_brats_files(training_datapath, validation_datapath, niipath, labelpath, val_niipath)
+nii_data_process_BraTS2020(training_datapath, validation_datapath, niipath, labelpath, val_niipath)
 
 with open("/kaggle/working/datalist.json") as f:
     datalist = json.load(f)
