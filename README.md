@@ -18,7 +18,7 @@ get_ipython().system(f"python preprocess_data.py") ##For iseg dataset
 
 # Chuyển đến thư mục làm việc
 get_ipython().system("cd /kaggle/working/")
-USER = "RC-Sho0"
+USER = "khanhdat111"
 REPO_NAME = "3D-DynUnet"
 CLONE_URL = f"https://github.com/{USER}/{REPO_NAME}.git"
 get_ipython().system(f"git clone -b icta {CLONE_URL}")
