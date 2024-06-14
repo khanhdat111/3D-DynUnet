@@ -45,10 +45,10 @@ def process_brats_files(training_datapath, validation_datapath, niipath, labelpa
     with open('/kaggle/working/datalist.json', "w") as f:
         json.dump(datalist, f)
 
-training_datapath = "/kaggle/input/brats20-dataset-training-validation/BraTS2020_TrainingData/MICCAI_BraTS2020_TrainingData"
-validation_datapath = "/kaggle/input/brats20-dataset-training-validation/BraTS2020_ValidationData/MICCAI_BraTS2020_ValidationData"
-niipath = "/kaggle/working/imagesTr"
-labelpath = "/kaggle/working/labelsTr"
-val_niipath = "/kaggle/working/imagesTs"
+# training_datapath = "/kaggle/input/brats20-dataset-training-validation/BraTS2020_TrainingData/MICCAI_BraTS2020_TrainingData"
+# validation_datapath = "/kaggle/input/brats20-dataset-training-validation/BraTS2020_ValidationData/MICCAI_BraTS2020_ValidationData"
+# niipath = "/kaggle/working/imagesTr"
+# labelpath = "/kaggle/working/labelsTr"
+# val_niipath = "/kaggle/working/imagesTs"
 
-process_brats_files(training_datapath, validation_datapath, niipath, labelpath, val_niipath)
+# process_brats_files(training_datapath, validation_datapath, niipath, labelpath, val_niipath)
