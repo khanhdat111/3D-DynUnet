@@ -23,7 +23,7 @@ def process_brats_files(training_datapath, validation_datapath, niipath, labelpa
         t1ce_path = os.path.join(subject_path, f'{subject_id}_t1ce.nii')
         t2_path = os.path.join(subject_path, f'{subject_id}_t2.nii')
         if i==355:
-            seg_path = os.path.join(subject_path, "W39_1998.09.19_Segm.nii"')
+            seg_path = os.path.join(subject_path, 'W39_1998.09.19_Segm.nii')
         else:
             seg_path = os.path.join(subject_path, f'{subject_id}_seg.nii')
         train.append({'label': [seg_path], 'image': [flair_path, t1_path, t1ce_path, t2_path]})
