@@ -7,12 +7,14 @@ https://www.kaggle.com/datasets/rcshoo/iseg19
 ```
 2. Clone the repo and install the dependent libraries
 ```python
-get_ipython().system("cd /kaggle/working/")
+get_ipython().system(f"cd /kaggle/working/")
+GITHUB_TOKEN = "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"
 USER = "khanhdat111"
-REPO_NAME = "3D-DynUnet"
-CLONE_URL = f"https://github.com/{USER}/{REPO_NAME}.git"
-get_ipython().system(f"git clone -b icta {CLONE_URL}")
-get_ipython().system("cd /kaggle/working/BrainTumour_Seg")
+branch = "master"
+
+CLONE_URL = f"https://{USER}:{GITHUB_TOKEN}@github.com/{USER}/3D-DynUnet.git"
+get_ipython().system(f"git clone -b {branch} {CLONE_URL}")
+%cd /kaggle/working/3D-DynUnet
 ```
 
 3. Adjust parameters in file config.json
