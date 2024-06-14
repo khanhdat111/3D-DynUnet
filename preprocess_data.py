@@ -1,5 +1,5 @@
 from libs.data.hdr2nii import conver_hdr2nii
-
+import nii_data_process_BraTS2020
 import json
 
 # hdrpath = "/kaggle/input/iseg19/iSeg-2019-Training/iSeg-2019-Training"
