@@ -216,7 +216,7 @@ def main(data):
         train_loader, val_loader = kits_dataloader(datalist, 1, 'train', False)
     else:
         print("BraTS Dataset")
-        train_loader, val_loader = dataloader(datalist, 8, 'train', False) 
+        train_loader, val_loader = dataloader(datalist, 8, 'train', False) #Change batch size
 
 
     ##Init method and params
