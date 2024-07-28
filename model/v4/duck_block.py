@@ -11,6 +11,8 @@ from typing import List, Optional, Sequence, Tuple, Union
 from torch.nn.functional import interpolate
 from monai.networks.blocks.dynunet_block import UnetOutBlock, UnetBasicBlock, UnetResBlock
 
+from model.module_duck import get_dilated_conv_layer, get_seperated_conv_layer, get_conv_laye
+
 class WideUnetBlock(nn.Module):
     def __init__(
         self,
@@ -258,4 +260,98 @@ class Residualx2_BottleNeck(nn.Module):
 
     def forward(self, x):
         out = self.res_unet_block_2(x)
+        return out
+
+class UnetBasicDuckBlock(nn.Module):
+    def __init__(
+        self,
+        spatial_dims: int,
+        in_channels: int,
+        out_channels: int,
+        kernel_size: Sequence[int] | int,
+        stride: Sequence[int] | int,
+        norm_name: tuple | str,
+        act_name: tuple | str = ("leakyrelu", {"inplace": True, "negative_slope": 0.01}),
+        dropout: tuple | str | float | None = None,
+    ):
+        super().__init__()
+        self.conv1 = get_conv_layer(
+            spatial_dims,
+            in_channels,
+            out_channels,
+            kernel_size=kernel_size,
+            stride=stride,
+            dropout=dropout,
+            act=None,
+            norm=None,
+            conv_only=False,
+        )
+        self.conv2 = DuckBlock3D(
+            spatial_dims,
+            out_channels,
+            out_channels,
+            kernel_size=kernel_size,
+            stride=1,
+            dropout=dropout,
+            act_name=act_name,
+            norm_name=norm_name
+        )
+        self.lrelu = get_act_layer(name=act_name)
+        self.norm1 = get_norm_layer(name=norm_name, spatial_dims=spatial_dims, channels=out_channels)
+        self.norm2 = get_norm_layer(name=norm_name, spatial_dims=spatial_dims, channels=out_channels)
+
+    def forward(self, inp):
+        out = self.conv1(inp)
+        out = self.norm1(out)
+        out = self.lrelu(out)
+        out = self.conv2(out)
+        out = self.norm2(out)
+        return out
+
+class UnetUpBlock(nn.Module):
+    def __init__(
+        self,
+        spatial_dims: int,
+        in_channels: int,
+        out_channels: int,
+        kernel_size: Sequence[int] | int,
+        stride: Sequence[int] | int,
+        upsample_kernel_size: Sequence[int] | int,
+        norm_name: tuple | str,
+        act_name: tuple | str = ("leakyrelu", {"inplace": True, "negative_slope": 0.01}),
+        dropout: tuple | str | float | None = None,
+        trans_bias: bool = False,
+    ):
+        super().__init__()
+        upsample_stride = upsample_kernel_size
+        self.transp_conv = get_conv_layer(
+            spatial_dims,
+            in_channels,
+            out_channels,
+            kernel_size=upsample_kernel_size,
+            stride=upsample_stride,
+            dropout=dropout,
+            bias=trans_bias,
+            act=None,
+            norm=None,
+            conv_only=False,
+            is_transposed=True,
+        )
+        self.conv_block = DuckBlock3D(
+            spatial_dims,
+            out_channels + out_channels,
+            out_channels , 
+            kernel_size=kernel_size,
+            stride=1,
+            dropout=dropout,
+            norm_name=norm_name,
+            act_name=act_name,
+        )
+
+    def forward(self, inp, skip):
+        # number of channels for skip should equals to out_channels
+        out = self.transp_conv(inp)
+        out = torch.cat((out, skip), dim=1) # Sửa ở đây -----------------------------------
+#         out = torch.add(out, skip)
+        out = self.conv_block(out)
         return out
