@@ -11,6 +11,8 @@ from typing import List, Optional, Sequence, Tuple, Union
 from torch.nn.functional import interpolate
 from monai.networks.blocks.dynunet_block import UnetOutBlock, UnetBasicBlock, UnetResBlock
 
+from model.v4.duck_block import DuckBlock3D, Residualx2_BottleNeck, UnetBasicDuckBlock
+
 class DynUNetSkipLayer(nn.Module):
     heads: Optional[List[torch.Tensor]]
 
@@ -63,7 +65,7 @@ class DynUNet_DUCK(nn.Module):
         self.dropout = dropout
         self.conv_block = UnetResBlock if res_block else DuckBlock3D
         self.conv_block_down = UnetBasicDuckBlock
-        self.conv_block_bottle = UnetResBlock #Residualx2_BottleNeck
+        self.conv_block_bottle = Residualx2_BottleNeck #UnetResBlock 
         self.trans_bias = trans_bias
         if filters is not None:
             self.filters = filters
