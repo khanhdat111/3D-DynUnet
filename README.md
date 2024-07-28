@@ -1,6 +1,22 @@
-## Problem Overview
-The DynUnet architecture, enhanced with the Duck3D Block , is deployed for segmenting three different types of brain tumors from MRI scans: whole tumor (WT), tumor core (TC), and enhancing tumor (ET). Each MRI scan is represented as a tensor in  $R^{h \times w \times \times d \times 4}$, encompassing four distinct imaging modalities: T1-weighted (T1w), post-contrast T1-weighted with Gadolinium (T1Gd), T2-weighted (T2w), and Fluid Attenuated Inversion Recovery (FLAIR).
+# Enhanced DynUNet for Brain Tumor Segmentation
 
-The objective is to classify each voxel into one of four categories: WT, TC, ET, or non-tumor background. The segmentation process employs a binary mask $F$  in the space $R^{h \times w \times \times \times 4}$, where each dimension in the fourth axis represents the probability that a voxel belongs to one of the tumor categories.
+## Introduction
+This repository contains the implementation of the Enhanced DynUNet architecture, which integrates the Duck3D Block for improved brain tumor segmentation. Our method has been validated on the BraTS 2018 dataset, demonstrating superior performance in segmenting Whole Tumor (WT), Tumor Core (TC), and Enhancing Tumor (ET).
 
-## Model and Duck3D Block
+## Highlights
+- **State-of-the-art Performance**: Achieves higher Dice scores compared to existing models.
+- **Innovative Architecture**: Incorporation of the Duck3D Block enhances feature extraction capabilities.
+- **Clinical Relevance**: Provides a reliable tool for aiding in the diagnosis and treatment planning of brain tumors.
+
+## Model Overview
+The Enhanced DynUNet model incorporates multiple novel components:
+- **Duck3D Block**: Enhances the model's ability to focus on relevant features within MRI scans.
+- **Residual Blocks**: Implemented at various points to prevent gradient vanishing and ensure deep feature learning.
+- **Multi-Scale Processing**: Facilitates accurate segmentation across different tumor regions.
+
+## Installation
+To set up this project, clone the repository and install the required dependencies:
+```bash
+git clone https://github.com/yourusername/enhanced-dynunet-brain-tumor-segmentation.git
+cd enhanced-dynunet-brain-tumor-segmentation
+pip install -r requirements.txt
