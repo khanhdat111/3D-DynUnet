@@ -14,6 +14,10 @@ The Enhanced DynUNet model incorporates multiple novel components:
 - **Residual Blocks**: Implemented at various points to prevent gradient vanishing and ensure deep feature learning.
 - **Multi-Scale Processing**: Facilitates accurate segmentation across different tumor regions.
 
+
+## Dataset
+The model was trained and validated on the BraTS 2018 dataset, which is publicly available for research purposes.
+
 ## Installation
 To set up this project, clone the repository and install the required dependencies:
 ```bash
