@@ -8,12 +8,16 @@ https://www.kaggle.com/datasets/rcshoo/iseg19
 2. Clone the repo and install the dependent libraries
 ```python
 get_ipython().system(f"cd /kaggle/working/")
-GITHUB_TOKEN = "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"
-USER = "khanhdat111"
+GITHUB_TOKEN = "your_token"
+USER = "your_user"
 branch = "master"
 
 CLONE_URL = f"https://{USER}:{GITHUB_TOKEN}@github.com/{USER}/3D-DynUnet.git"
 get_ipython().system(f"git clone -b {branch} {CLONE_URL}")
+%cd /kaggle/working/3D-DynUnet
+
+import sys
+sys.path.append("3D-DynUnet")
 %cd /kaggle/working/3D-DynUnet
 ```
 
