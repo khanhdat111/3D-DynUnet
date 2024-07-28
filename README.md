@@ -17,6 +17,6 @@ The Enhanced DynUNet model incorporates multiple novel components:
 ## Installation
 To set up this project, clone the repository and install the required dependencies:
 ```bash
-git clone https://github.com/yourusername/enhanced-dynunet-brain-tumor-segmentation.git
-cd enhanced-dynunet-brain-tumor-segmentation
+git clone https://github.com/khanhdat111/3D-DynUnet.git
+cd 3D-DynUnet
 pip install -r requirements.txt
