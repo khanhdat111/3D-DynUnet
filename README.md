@@ -1,64 +1,6 @@
-# BrainTumour_Seg
+## Problem Overview
+The DynUnet architecture, enhanced with the Duck3D Block , is deployed for segmenting three different types of brain tumors from MRI scans: whole tumor (WT), tumor core (TC), and enhancing tumor (ET). Each MRI scan is represented as a tensor in  $R^{h \times w \times \times d \times 4}$, encompassing four distinct imaging modalities: T1-weighted (T1w), post-contrast T1-weighted with Gadolinium (T1Gd), T2-weighted (T2w), and Fluid Attenuated Inversion Recovery (FLAIR).
 
-## How to install:
-1. Open Kaggle and add this dataset:
-```
-https://www.kaggle.com/datasets/rcshoo/iseg19
-```
-2. Clone the repo and install the dependent libraries
-```python
-get_ipython().system(f"cd /kaggle/working/")
-GITHUB_TOKEN = "your_token"
-USER = "your_user"
-branch = "master"
+The objective is to classify each voxel into one of four categories: WT, TC, ET, or non-tumor background. The segmentation process employs a binary mask $F$  in the space $R^{h \times w \times \times \times 4}$, where each dimension in the fourth axis represents the probability that a voxel belongs to one of the tumor categories.
 
-CLONE_URL = f"https://{USER}:{GITHUB_TOKEN}@github.com/{USER}/3D-DynUnet.git"
-get_ipython().system(f"git clone -b {branch} {CLONE_URL}")
-%cd /kaggle/working/3D-DynUnet
-
-import sys
-sys.path.append("3D-DynUnet")
-%cd /kaggle/working/3D-DynUnet
-```
-
-3. Adjust parameters in file config.json
-```json
-{
-    "model_name": "", 
-    "att": null,
-    "in_channel": 2,
-    "out_channel": 4,
-    "project": "iseg",
-    "model_trained": null,
-    "datalist": "/kaggle/working/datalist.json",
-    "config":{
-        "step_val": 5,
-        "loss": "dice",
-        "max_epochs": 100,
-        "name":"dynunet_dda_s1",
-        "lr":3e-4,
-        "tmax": 100,
-        "results_dir":"/kaggle/working/results",
-        "log": true
-    }
-} 
-```
-    - Model name: ['dynunet','dynunet_dda','segresnet','swinunetr','vnet','dynunet_cbam','dsdynunet','dsdynunet_cbam','dsdynunet_dda']
-    - Att: number of filter add Attention (exp: [32,64] for DDA in stage 1,2 in dynunet_dda model)
-    - in_channel: number channel input
-    - out_channel: number channel output
-    - project: wandb project name
-    - model_trained: weighted of model (optinal for pretrained)
-    - datalist: path of datalist
-    - config: 
-        + step_val: number of epochs model skip run valid step
-        + max_epochs: max epochs
-        + name: name of experiment on wanbd
-        + lr: init learning rate 
-        + log: let it true if you want to track on wandb
-
-
-4. Runnn:
-```
-!python seg_train.py --input /kaggle/working/exp.json
-```
+## Model and Duck3D Block
