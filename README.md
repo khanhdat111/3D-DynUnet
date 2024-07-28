@@ -25,17 +25,13 @@ The Enhanced DynUNet model incorporates multiple novel components:
 Our method has been extensively tested and evaluated on the BraTS 2018 dataset, with results indicating substantial improvements over existing methods. Below are the comparative tables showcasing the performance of our enhanced DynUNet model against other state-of-the-art methods. These results highlight the effectiveness of our proposed improvements in the segmentation of brain tumors.
 
 ### Comparative Analysis 1: Overall Performance
-![Overall Performance Comparison](/path/to/overall_performance_comparison.png)
-*Figure 1: Comparative analysis of overall Dice scores across different methods.*
+![Overall Performance Comparison](Images/sota.png)
 
 ### Comparative Analysis 2: Impact of Duck3D Block
-![Impact of Duck3D Block](/path/to/impact_of_duck3d_block.png)
-*Figure 2: Results showing the impact of integrating the Duck3D Block into the DynUNet architecture.*
+![Impact of Duck3D Block](Images/fig1.png)
 
 ### Comparative Analysis 3: Effect of Residual Blocks
-![Effect of Residual Blocks](/path/to/effect_of_residual_blocks.png)
-*Figure 3: Performance differences resulting from varying the number of residual blocks at the bottleneck.*
-
+![Effect of Residual Blocks](Images/abs.png)
 
 ## Dataset
 The model was trained and validated on the BraTS 2018 dataset, which is publicly available for research purposes.
